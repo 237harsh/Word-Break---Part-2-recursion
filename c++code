@@ -1,0 +1,38 @@
+class Solution{
+public:
+vector<string>an;
+void fun(string t,string s, unordered_map<string ,int>&mp)
+{
+   if(s.size()==0)
+   {
+       t.pop_back();
+       an.push_back(t);
+       return;
+   }
+   for(int i=0;i<s.size();i++)
+   {
+       string left=s.substr(0,i+1);//first find left sustringand then cheak for right;
+       
+       if(mp.find(left)!=mp.end())
+       {
+           string right=s.substr(i+1);
+           //add left ans space and cheak for right substring
+           fun(t+left+" ",right,mp);
+       }
+   }
+   
+}
+    vector<string> wordBreak(int n, vector<string>& dict, string s)
+    {
+        unordered_map<string ,int>mp;
+        for(int i=0;i<n;i++)
+        {
+            mp[dict[i]]++;
+        }
+        string t="",temp="";
+        fun(t,s,mp);
+        return an;
+    }
+};
+
+https://practice.geeksforgeeks.org/problems/word-break-part-23249/1/?page=2&category[]=Recursion&sortBy=submissions#
